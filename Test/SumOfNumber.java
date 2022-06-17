@@ -32,20 +32,20 @@ public class SumOfNumber {
         // System.out.println(Arrays.toString(newArrStringNum));
 
         // other method
-        ArrayList<String> newArrStringNum = new ArrayList<String>();
+        // Create new integer arraylist with only number (exclude text)
+        int result = 0;
         for (String ii : newArr) {
             if (ii.matches("[0-9]+")) {
-                newArrStringNum.add(ii);
+                int iiNew = Integer.parseInt(ii); // convert String to Integer
+                result = result + iiNew;
             }
         }
-        System.out.println(newArrStringNum);
 
         // Convert string to integer from array and then sum of the integer
-        int result = 0;
-        for (String jj : newArrStringNum) {
-            result = result + Integer.parseInt(jj);
-            System.out.println(result);
-        }
+        // int result = 0;
+        // for (int jj : newArrIntNum) {
+        // result = result + jj;
+        // }
         System.out.println(result);
 
         System.out.println("Sum of numbers equals to " + result);

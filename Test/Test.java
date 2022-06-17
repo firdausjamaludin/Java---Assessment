@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.math.RandomUtils;
@@ -14,22 +15,16 @@ public class Test {
 		 * For example, s="12 some text 3  7", result: 22 (12+3+7=22)
 		 */
 
-		// Create new array without spaces from string arguments
+		// Create new string array separated by spaces(\\s+) from string arguments
 		String[] newArr = s.split("\\s+", 0); // [text, mix, with, 112, and, 222, with, numbers, 2, 278, 991]
 
-		// Create new array with only string number
-		ArrayList<String> newArrStringNum = new ArrayList<String>(); // [112, 222, 2, 278, 991]
+		// Loop trough newArr, find number only, string number convert interger and
+		int result = 0;
 		for (String ii : newArr) {
 			if (ii.matches("[0-9]+")) {
-				newArrStringNum.add(ii);
+				int iiNew = Integer.parseInt(ii); // convert String to Integer
+				result = result + iiNew; // finally sum all the interger
 			}
-		}
-		System.out.println(newArrStringNum);
-
-		// Convert string to integer from array and then sum of the integer
-		int result = 0;
-		for (String jj : newArrStringNum) {
-			result = result + Integer.parseInt(jj);
 		}
 
 		System.out.println("Sum of numbers equals to " + result);
@@ -41,8 +36,15 @@ public class Test {
 		 * sort a given array of Strings in alphabetical order
 		 * ignoring spaces (' ' symbols) within the strings.
 		 */
+
+		// sort the array into number,Uppercase,Lowercase in alphabetical order
+		Arrays.sort(array); // [ , , -111, 1, 9, ABC, HLB, google, test, webiste, why]
+
 		System.out.println("Answer for sort ignoring space:");
 		for (String s : array) {
+			if (s.matches("\\s+")) { // print array while ignore spaces
+				continue;
+			}
 			System.out.println(s);
 		}
 	}
@@ -53,6 +55,13 @@ public class Test {
 		 * reverse array where the order of elements has been reversed from the original
 		 * array. E.g. given {"a", "b", "c", "d"}, result is {"d", "c", "b", "a"}
 		 */
+
+		// Loop through array to swap front and back value simultaneously
+		for (int i = 0; i < array.length / 2; i++) {
+			String tempVarr = array[i];
+			array[i] = array[array.length - i - 1];
+			array[array.length - i - 1] = tempVarr;
+		}
 
 		System.out.println("Answer for reverse array:");
 		for (String s : array) {
@@ -66,7 +75,25 @@ public class Test {
 		 * calculate the sum of the two largest numbers in a given array.
 		 */
 
-		System.out.println("Sum of the two largest numbers is ");
+		int max1, max2;
+		// Find first largest element in an array and assign it to max1.
+		max1 = Arrays.stream(array).max().getAsInt(); // 58
+
+		// Loop trough the array to find largest element and swap the value with 0
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == max1) {
+				array[i] = 0;
+				break;
+			}
+		}
+
+		// Then, find new largest element in the array and assign to max2
+		max2 = Arrays.stream(array).max().getAsInt(); // 47
+
+		// Sum the max1 and max2
+		int result = max1 + max2; // 105
+
+		System.out.println("Sum of the two largest numbers is " + result);
 	}
 
 	// Please do not change this helper class
